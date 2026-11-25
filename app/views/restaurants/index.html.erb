@@ -1,0 +1,20 @@
+<div class="app-card">
+  <div class="page-header">
+    <h1>Restaurants</h1>
+    <%= link_to "+ Add a Restaurant", new_restaurant_path, class: "btn-purple" %>
+  </div>
+
+  <% if @restaurants.empty? %>
+    <p class="empty">No restaurants yet.</p>
+  <% end %>
+
+  <% @restaurants.each do |restaurant| %>
+    <div class="resto-item">
+      <div>
+        <%= link_to restaurant.name, restaurant_path(restaurant) %>
+        <div class="resto-address">📍 <%= restaurant.address %></div>
+      </div>
+      <span class="badge-cat"><%= restaurant.category %></span>
+    </div>
+  <% end %>
+</div>

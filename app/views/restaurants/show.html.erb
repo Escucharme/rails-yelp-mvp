@@ -1,0 +1,36 @@
+<div class="app-card">
+  <div class="page-header">
+    <h1><%= @restaurant.name %></h1>
+    <span class="badge-cat"><%= @restaurant.category %></span>
+  </div>
+
+  <div class="info-box">
+    <p>📍 <%= @restaurant.address %></p>
+    <p>📞 <%= @restaurant.phone_number %></p>
+  </div>
+
+  <h2 class="h4 mb-3">Reviews</h2>
+
+  <% if @restaurant.reviews.none?(&:persisted?) %>
+    <p class="empty">No reviews yet. Be the first!</p>
+  <% end %>
+
+  <% @restaurant.reviews.each do |review| %>
+    <% next unless review.persisted? %>
+    <div class="review-item">
+      <p class="stars"><%= "★" * review.rating %><%= "☆" * (5 - review.rating) %></p>
+      <p><%= review.content %></p>
+    </div>
+  <% end %>
+
+  <div class="info-box mt-4">
+    <h3 class="h5 mb-3">Ajouter un avis</h3>
+    <%= simple_form_for [@restaurant, @review] do |f| %>
+      <%= f.input :content %>
+      <%= f.input :rating, collection: (0..5).to_a %>
+      <%= f.submit "Add review", class: "btn-purple" %>
+    <% end %>
+  </div>
+
+  <%= link_to "← Back to list", restaurants_path, class: "footer-link" %>
+</div>

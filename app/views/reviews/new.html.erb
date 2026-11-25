@@ -1,0 +1,13 @@
+<div class="app-card">
+  <div class="page-header">
+    <h1>Review <%= @restaurant.name %></h1>
+  </div>
+
+  <%= simple_form_for [@restaurant, @review] do |f| %>
+    <%= f.input :content %>
+    <%= f.input :rating, collection: (0..5).to_a %>
+    <%= f.submit "Add review", class: "btn-purple" %>
+  <% end %>
+
+  <%= link_to "← Back to restaurant", restaurant_path(@restaurant), class: "footer-link" %>
+</div>

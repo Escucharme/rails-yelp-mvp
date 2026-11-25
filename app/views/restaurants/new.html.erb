@@ -1,0 +1,15 @@
+<div class="app-card">
+  <div class="page-header">
+    <h1>New restaurant</h1>
+  </div>
+
+  <%= simple_form_for @restaurant do |f| %>
+    <%= f.input :name %>
+    <%= f.input :category, collection: ["chinese", "italian", "japanese", "french", "belgian"] %>
+    <%= f.input :phone_number %>
+    <%= f.input :address %>
+    <%= f.submit "Create restaurant", class: "btn-purple" %>
+  <% end %>
+
+  <%= link_to "← Back to list", restaurants_path, class: "footer-link" %>
+</div>
